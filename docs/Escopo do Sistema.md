@@ -4,10 +4,10 @@
 
 ## Sumário
 
-- [1. Visão Geral](#1.visão-geral)
-- [2. Público-Alvo](#2.público-alvo)
-- [3. Funcionalidades do Sistema](#3.funcionalidades-do-sistema)
-- [4. Limites do Sistema](#4.limites-do-sistema)
+- [1. Visão Geral](#1-visão-geral)
+- [2. Público-Alvo](#2-público-alvo)
+- [3. Funcionalidades do Sistema](#3-funcionalidades-do-sistema)
+- [4. Limites do Sistema](#4-limites-do-sistema-fora-do-escopo)
 
 # 1. Visão Geral
 
