@@ -1,6 +1,13 @@
-# Escopo do Sistema
+# 📑 Escopo do Sistema
 
 **Este documento apresenta o escopo do sistema, descrevendo de forma geral os objetivos, o público-alvo, as funcionalidades e as limitações da aplicação. O escopo tem como finalidade estabelecer uma visão clara do que o sistema se proprõe a resolver, definindo quais funcionalidades fazem parte do projeto e quais estão fora do domínio, servindo como base para o levantamento dos requisitos.**
+
+## Sumário
+
+- [1. Visão Geral](#1.visão-geral)
+- [2. Público-Alvo](#2.público-alvo)
+- [3. Funcionalidades do Sistema](#3.funcionalidades-do-sistema)
+- [4. Limites do Sistema](#4.limites-do-sistema)
 
 # 1. Visão Geral
 
