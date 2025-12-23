@@ -7,6 +7,6 @@ import { FreelancerModule } from './freelancer/freelancer.module';
 @Module({
   imports: [PrismaModule, FreelancerModule],
   controllers: [AppController],
-  providers: [],
+  providers: [AppService],
 })
 export class AppModule {}
