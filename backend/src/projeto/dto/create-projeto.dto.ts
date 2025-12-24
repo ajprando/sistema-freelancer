@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsUUID, MaxLength, IsDecimal } from 'class-validator';
+import { IsString, IsOptional, IsUUID, MaxLength, IsDecimal, IsNumber, Min } from 'class-validator';
 
 export class CreateProjetoDto {
   @IsString()
@@ -15,7 +15,8 @@ export class CreateProjetoDto {
   @IsUUID()
   clienteId: string;
 
-  @IsDecimal({ decimal_digits: '1,2' })
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @Min(0)
   @IsOptional()
   valorTotal?: number;
 }
