@@ -1,4 +1,5 @@
-import { IsString, IsUUID, IsDecimal, IsOptional, MaxLength } from 'class-validator';
+import { IsString, IsUUID, IsDecimal, IsOptional, MaxLength, IsEnum } from 'class-validator';
+import { AtividadeStatus } from '@prisma/client';
 
 export class CreateAtividadeDto {
   @IsString()
@@ -11,7 +12,7 @@ export class CreateAtividadeDto {
   @IsUUID()
   projetoId: string;
 
-  @IsString()
+  @IsEnum(AtividadeStatus)
   @IsOptional()
-  status?: string;
+  status?: AtividadeStatus;
 }
