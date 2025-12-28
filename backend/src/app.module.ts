@@ -8,9 +8,19 @@ import { ProjetoModule } from './projeto/projeto.module';
 import { AtividadeModule } from './atividade/atividade.module';
 import { RegistroHorasModule } from './registro-horas/registro-horas.module';
 import { PagamentoModule } from './pagamento/pagamento.module';
+import { ContadorModule } from './contador/contador.module';
 
 @Module({
-  imports: [PrismaModule, FreelancerModule, ClienteModule, ProjetoModule, AtividadeModule, RegistroHorasModule, PagamentoModule],
+  imports: [
+    PrismaModule, 
+    FreelancerModule, 
+    ClienteModule, 
+    ProjetoModule, 
+    AtividadeModule, 
+    RegistroHorasModule, 
+    PagamentoModule, 
+    ContadorModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
