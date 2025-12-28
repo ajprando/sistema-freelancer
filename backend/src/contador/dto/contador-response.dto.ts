@@ -1,4 +1,4 @@
-export class CounterResponseDto {
+export class ContadorResponseDto {
   value: number;
   timestamp: Date;
 }
