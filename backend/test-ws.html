@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>WebSocket Contador Test</h1>
+    <div id="status">Desconectado</div>
+    <div id="counter">Contador: 0</div>
+    <button onclick="increment( )">Incrementar</button>
+    <button onclick="reset()">Resetar</button>
+    <div id="log" style="border: 1px solid black; padding: 10px; margin-top: 20px; height: 200px; overflow-y: auto;"></div>
+
+    <script>
+        const socket = io('http://localhost:3000', {
+            reconnection: true,
+            reconnectionDelay: 1000,
+            reconnectionDelayMax: 5000,
+            reconnectionAttempts: 5
+        } );
+
+        socket.on('connect', () => {
+            document.getElementById('status').innerText = 'Conectado';
+            addLog('Conectado ao WebSocket');
+            console.log('Conectado ao WebSocket');
+        });
+
+        socket.on('contadorUpdated', (data) => {
+            console.log('Evento contadorUpdated recebido:', data);
+            addLog(`Contador atualizado: ${data.value}`);
+            document.getElementById('counter').innerText = `Contador: ${data.value}`;
+        });
+
+        socket.on('disconnect', () => {
+            document.getElementById('status').innerText = 'Desconectado';
+            addLog('Desconectado do WebSocket');
+            console.log('Desconectado do WebSocket');
+        });
+
+        socket.on('connect_error', (error) => {
+            addLog(`Erro de conexão: ${error}`);
+            console.error('Erro de conexão:', error);
+        });
+
+        function increment() {
+            addLog('Enviando: increment');
+            socket.emit('increment', { amount: 1 });
+        }
+
+        function reset() {
+            addLog('Enviando: reset');
+            socket.emit('reset', {});
+        }
+
+        function addLog(msg) {
+            const log = document.getElementById('log');
+            const p = document.createElement('p');
+            p.innerText = msg;
+            log.appendChild(p);
+            log.scrollTop = log.scrollHeight;
+        }
+    </script>
+</body>
+</html>

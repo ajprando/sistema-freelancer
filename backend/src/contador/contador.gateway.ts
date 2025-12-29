@@ -11,9 +11,11 @@ import { IncrementContadorDto } from './dto/increment-contador.dto';
 import { ContadorResponseDto } from './dto/contador-response.dto';
 
 @WebSocketGateway({
-  cors: {
+    transports: ['websocket', 'polling'],
+    cors: {
     origin: '*',
     methods: ['GET', 'POST'],
+    credentials: false,
   },
 })
 export class ContadorGateway implements OnGatewayConnection, OnGatewayDisconnect {
@@ -21,6 +23,10 @@ export class ContadorGateway implements OnGatewayConnection, OnGatewayDisconnect
   server: Server;
 
   constructor(private readonly contadorService: ContadorService) {}
+
+  afterInit(server: Server) {
+    console.log('WebSocket Gateway inicializado');
+  }
 
   handleConnection(client: Socket) {
     console.log(`Cliente conectado: ${client.id}`);
@@ -37,17 +43,17 @@ export class ContadorGateway implements OnGatewayConnection, OnGatewayDisconnect
   }
 
   @SubscribeMessage('increment')
-  handleIncrement(
-    client: Socket,
-    payload: IncrementContadorDto,
-  ): ContadorResponseDto {
-    const amount = payload.amount || 1;
+  handleIncrement(client: Socket, payload: any) {
+    console.log(`Incrementando contador...`, payload);
+    const amount = payload?.amount || 1;
     const value = this.contadorService.increment(amount);
-
+  
     const response: ContadorResponseDto = {
       value,
       timestamp: new Date(),
     };
+
+    console.log(`Emitindo contadorUpdated:`, response);
 
     this.server.emit('contadorUpdated', response);
 
@@ -55,7 +61,7 @@ export class ContadorGateway implements OnGatewayConnection, OnGatewayDisconnect
   }
 
   @SubscribeMessage('getValue')
-  handleGetValue(): ContadorResponseDto {
+  handleGetValue(client: Socket) { 
     const value = this.contadorService.getValue();
 
     return {
@@ -65,7 +71,8 @@ export class ContadorGateway implements OnGatewayConnection, OnGatewayDisconnect
   }
 
   @SubscribeMessage('reset')
-  handleReset(): ContadorResponseDto {
+  handleReset(client: Socket) {
+    console.log(`Resetando contador...`);
     const value = this.contadorService.reset();
 
     const response: ContadorResponseDto = {
@@ -73,8 +80,9 @@ export class ContadorGateway implements OnGatewayConnection, OnGatewayDisconnect
       timestamp: new Date(),
     };
 
+    console.log(`Emitindo contadorUpdated:`, response);
+
     this.server.emit('contadorUpdated', response);
 
-    return response;
   }
 }
