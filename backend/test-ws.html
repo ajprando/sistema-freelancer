@@ -59,12 +59,12 @@
 
         // Comunicação backend
         function startTimer() {
-            addLog('📤 Enviando: startTimer');
+            addLog('Enviando: startTimer');
             socket.emit('startTimer', {});
         }
 
         function stopTimer() {
-            addLog('📤 Enviando: stopTimer');
+            addLog('Enviando: stopTimer');
             socket.emit('stopTimer', {});
         }
 
