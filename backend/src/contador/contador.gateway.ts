@@ -7,8 +7,6 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { ContadorService } from './contador.service';
-import { IncrementContadorDto } from './dto/increment-contador.dto';
-import { ContadorResponseDto } from './dto/contador-response.dto';
 
 @WebSocketGateway({
     transports: ['websocket', 'polling'],
@@ -22,7 +20,7 @@ export class ContadorGateway implements OnGatewayConnection, OnGatewayDisconnect
   @WebSocketServer()
   server: Server;
 
-  constructor(private readonly contadorService: ContadorService) {}
+  constructor(private readonly counterService: ContadorService) {}
 
   afterInit(server: Server) {
     console.log('WebSocket Gateway inicializado');
@@ -31,58 +29,35 @@ export class ContadorGateway implements OnGatewayConnection, OnGatewayDisconnect
   handleConnection(client: Socket) {
     console.log(`Cliente conectado: ${client.id}`);
 
-    const value = this.contadorService.getValue();
-    client.emit('contadorUpdated', {
-      value,
-      timestamp: new Date(),
-    } as ContadorResponseDto);
+    const startTime = this.counterService.getStartTime();
+    if (startTime) {
+      client.emit('timerStarted', { startTime: startTime.toISOString() });
+    }
   }
 
   handleDisconnect(client: Socket) {
     console.log(`Cliente desconectado: ${client.id}`);
   }
 
-  @SubscribeMessage('increment')
-  handleIncrement(client: Socket, payload: any) {
-    console.log(`Incrementando contador...`, payload);
-    const amount = payload?.amount || 1;
-    const value = this.contadorService.increment(amount);
-  
-    const response: ContadorResponseDto = {
-      value,
-      timestamp: new Date(),
+  @SubscribeMessage('startTimer')
+  handleStartTimer(client: Socket) {
+    const startTime = this.counterService.startTimer();
+
+    const response = {
+      startTime: startTime.toISOString(),
     };
 
-    console.log(`Emitindo contadorUpdated:`, response);
-
-    this.server.emit('contadorUpdated', response);
-
-    return response;
+    this.server.emit('timerStarted', response);
   }
 
-  @SubscribeMessage('getValue')
-  handleGetValue(client: Socket) { 
-    const value = this.contadorService.getValue();
+  @SubscribeMessage('stopTimer')
+  handleStopTimer(client: Socket) {
+    const stoppedTime = this.counterService.stopTimer();
 
-    return {
-      value,
-      timestamp: new Date(),
-    };
-  }
-
-  @SubscribeMessage('reset')
-  handleReset(client: Socket) {
-    console.log(`Resetando contador...`);
-    const value = this.contadorService.reset();
-
-    const response: ContadorResponseDto = {
-      value,
-      timestamp: new Date(),
+    const response = {
+      stoppedTime: stoppedTime ? stoppedTime.toISOString() : null,
     };
 
-    console.log(`Emitindo contadorUpdated:`, response);
-
-    this.server.emit('contadorUpdated', response);
-
+    this.server.emit('timerStopped', response);
   }
 }

@@ -1,49 +1,18 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
 import { ContadorService } from './contador.service';
-import { IncrementContadorDto } from './dto/increment-contador.dto';
-import { ContadorResponseDto } from './dto/contador-response.dto';
 
 @Controller('contador')
 export class ContadorController {
-    constructor(private readonly contadorService: ContadorService) {}
+  constructor(private readonly contadorService: ContadorService) {}
 
-    @Post('increment')
-    @HttpCode(HttpStatus.OK)
-    increment(@Body() incrementContadorDto: IncrementContadorDto): ContadorResponseDto {
-        const amount = incrementContadorDto.amount || 1;
-        const value = this.contadorService.increment(amount);
+  @Get('status')
+  @HttpCode(HttpStatus.OK)
+  getStatus() {
+    const startTime = this.contadorService.getStartTime();
 
-        return {
-            value,
-            timestamp: new Date(),
-        };
-    }
-
-    @Get()
-    getValue(): ContadorResponseDto {
-        const value = this.contadorService.getValue();
-
-        return {
-            value,
-            timestamp: new Date(),
-        };
-    }
-
-    @Post('reset')
-    @HttpCode(HttpStatus.OK)
-    reset(): ContadorResponseDto {
-        const value = this.contadorService.reset();
-
-        return {
-            value, 
-            timestamp: new Date(),
-        };
-    }
+    return {
+      isRunning: !!startTime,
+      startTime: startTime ? startTime.toISOString() : null,
+    };
+  }
 }
