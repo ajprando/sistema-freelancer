@@ -2,19 +2,20 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ContadorService {
-  private value: number = 0;
+  private startTime: Date | null = null;
 
-  increment(amount: number = 1): number {
-    this.value += amount;
-    return this.value;
+  startTimer(): Date {
+    this.startTime = new Date();
+    return this.startTime;
   }
 
-  getValue(): number {
-    return this.value;
+  stopTimer(): Date | null {
+    const stoppedTime = this.startTime;
+    this.startTime = null;
+    return stoppedTime;
   }
 
-  reset(): number {
-    this.value = 0;
-    return this.value;
+  getStartTime(): Date | null {
+    return this.startTime;
   }
 }
