@@ -1,0 +1,843 @@
+{
+	"info": {
+		"_postman_id": "7bc607d6-a8d6-447a-ac46-9bf8c65d16f7",
+		"name": "sistema-freelancer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31342014"
+	},
+	"item": [
+		{
+			"name": "Criar um Freelancer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"João Silva\",\r\n  \"email\": \"joao@example.com\",\r\n  \"senha\": \"senha123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/freelancers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"freelancers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos os Freelancers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/freelancers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"freelancers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Freelancer por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/freelancers/fc724cdb-59dd-41f2-acf3-412b4a4c27b4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"freelancers",
+						"fc724cdb-59dd-41f2-acf3-412b4a4c27b4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Freelancer por ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"João Silva Atualizado\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/freelancers/fc724cdb-59dd-41f2-acf3-412b4a4c27b4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"freelancers",
+						"fc724cdb-59dd-41f2-acf3-412b4a4c27b4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Freelancer por ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/freelancers/fc724cdb-59dd-41f2-acf3-412b4a4c27b4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"freelancers",
+						"fc724cdb-59dd-41f2-acf3-412b4a4c27b4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar um Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Maria Silva\",\r\n  \"email\": \"maria@email.com\",\r\n  \"telefone\": \"11999999999\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos os Clientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Cliente por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/clientes/224e5de8-fe55-46f9-9a58-43cc2a874361",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes",
+						"224e5de8-fe55-46f9-9a58-43cc2a874361"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Cliente por ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Maria Souza\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/clientes/224e5de8-fe55-46f9-9a58-43cc2a874361",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes",
+						"224e5de8-fe55-46f9-9a58-43cc2a874361"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Cliente por ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/clientes/224e5de8-fe55-46f9-9a58-43cc2a874361",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes",
+						"224e5de8-fe55-46f9-9a58-43cc2a874361"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar um Projeto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Sistema Freelancer\",\r\n    \"descricao\": \"Plataforma de gestão de freelancers\",\r\n    \"freelancerId\": \"04cfa9ac-52e9-4a5c-9938-23bbfcf8ce9e\",\r\n    \"clienteId\": \"74a4e9dd-e62d-47f3-b0e1-4cc8370b2142\",\r\n    \"valorTotal\": 1500.50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/projetos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"projetos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos os Projetos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/projetos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"projetos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Projetos por Freelancer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/projetos?freelancerId=04cfa9ac-52e9-4a5c-9938-23bbfcf8ce9e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"projetos"
+					],
+					"query": [
+						{
+							"key": "freelancerId",
+							"value": "04cfa9ac-52e9-4a5c-9938-23bbfcf8ce9e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Projetos por Cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/projetos?clienteId=74a4e9dd-e62d-47f3-b0e1-4cc8370b2142",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"projetos"
+					],
+					"query": [
+						{
+							"key": "clienteId",
+							"value": "74a4e9dd-e62d-47f3-b0e1-4cc8370b2142"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Projeto por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/projetos/017f886e-92ce-47a0-b6eb-00a0bdff16fb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"projetos",
+						"017f886e-92ce-47a0-b6eb-00a0bdff16fb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Projeto",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Sistema Freelancer v2\",\r\n  \"valorTotal\": 2000.00\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/projetos/017f886e-92ce-47a0-b6eb-00a0bdff16fb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"projetos",
+						"017f886e-92ce-47a0-b6eb-00a0bdff16fb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Projeto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/projetos/017f886e-92ce-47a0-b6eb-00a0bdff16fb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"projetos",
+						"017f886e-92ce-47a0-b6eb-00a0bdff16fb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar uma Atividade",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Implementar autenticação JWT\",\r\n  \"valorHora\": \"80.00\",\r\n  \"projetoId\": \"9f2510a9-9909-40ce-bfc1-773ae3069465\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/atividades",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"atividades"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todas as Atividades",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Implementar autenticação JWT\",\r\n  \"valorHora\": \"80.00\",\r\n  \"projetoId\": \"9f2510a9-9909-40ce-bfc1-773ae3069465\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/atividades",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"atividades"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Atividade por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Implementar autenticação JWT\",\r\n  \"valorHora\": \"80.00\",\r\n  \"projetoId\": \"9f2510a9-9909-40ce-bfc1-773ae3069465\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/atividades/d88c601b-3180-433e-a8a4-08d24242477f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"atividades",
+						"d88c601b-3180-433e-a8a4-08d24242477f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Atividade por Projeto",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Implementar autenticação JWT\",\r\n  \"valorHora\": \"80.00\",\r\n  \"projetoId\": \"9f2510a9-9909-40ce-bfc1-773ae3069465\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/atividades?projetoId=9f2510a9-9909-40ce-bfc1-773ae3069465",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"atividades"
+					],
+					"query": [
+						{
+							"key": "projetoId",
+							"value": "9f2510a9-9909-40ce-bfc1-773ae3069465"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Atividade por ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Implementar autenticação com refresh token\",\r\n  \"valorHora\": \"90.00\",\r\n  \"status\": \"CONCLUIDA\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/atividades/397fc87e-3867-415e-beea-4960964fa58a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"atividades",
+						"397fc87e-3867-415e-beea-4960964fa58a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Atividade",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Implementar autenticação JWT\",\r\n  \"valorHora\": \"80.00\",\r\n  \"projetoId\": \"9f2510a9-9909-40ce-bfc1-773ae3069465\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/atividades/397fc87e-3867-415e-beea-4960964fa58a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"atividades",
+						"397fc87e-3867-415e-beea-4960964fa58a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Registro de Horas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"inicio\": \"2025-12-27T10:00:00.000Z\",\r\n  \"fim\": \"2025-12-27T11:30:00.000Z\",\r\n  \"duracaoMinutos\": 90,\r\n  \"atividadeId\": \"d88c601b-3180-433e-a8a4-08d24242477f\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/registro-horas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"registro-horas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos os Registros",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"inicio\": \"2025-12-27T10:00:00.000Z\",\r\n  \"fim\": \"2025-12-27T11:30:00.000Z\",\r\n  \"duracaoMinutos\": 90,\r\n  \"atividadeId\": \"d88c601b-3180-433e-a8a4-08d24242477f\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/registro-horas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"registro-horas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Registro por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"inicio\": \"2025-12-27T10:00:00.000Z\",\r\n  \"fim\": \"2025-12-27T11:30:00.000Z\",\r\n  \"duracaoMinutos\": 90,\r\n  \"atividadeId\": \"d88c601b-3180-433e-a8a4-08d24242477f\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/registro-horas/75b262fc-09b2-4b65-b084-b6f62d713500",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"registro-horas",
+						"75b262fc-09b2-4b65-b084-b6f62d713500"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar registro (calcular duração)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fim\": \"2025-12-27T15:45:00.000Z\",\r\n  \"duracaoMinutos\": 105\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/registro-horas/65ef146d-9f26-4d6c-994a-e78920e5b03a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"registro-horas",
+						"65ef146d-9f26-4d6c-994a-e78920e5b03a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Registro",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"inicio\": \"2025-12-27T10:00:00.000Z\",\r\n  \"fim\": \"2025-12-27T11:30:00.000Z\",\r\n  \"duracaoMinutos\": 90,\r\n  \"atividadeId\": \"d88c601b-3180-433e-a8a4-08d24242477f\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/registro-horas/65ef146d-9f26-4d6c-994a-e78920e5b03a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"registro-horas",
+						"65ef146d-9f26-4d6c-994a-e78920e5b03a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Pagamento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"valor\": 100.00,\r\n  \"projetoId\": \"9f2510a9-9909-40ce-bfc1-773ae3069465\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/pagamentos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pagamentos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos os Pagamentos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"valor\": 100.00,\r\n  \"projetoId\": \"9f2510a9-9909-40ce-bfc1-773ae3069465\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/pagamentos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pagamentos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Pagamento por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/pagamentos/4c3671c6-eafe-4072-aa8a-23f3dceb7854",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pagamentos",
+						"4c3671c6-eafe-4072-aa8a-23f3dceb7854"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Pagamento",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"valor\": 250.00,\r\n  \"status\": \"PAGO\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/pagamentos/4c3671c6-eafe-4072-aa8a-23f3dceb7854",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pagamentos",
+						"4c3671c6-eafe-4072-aa8a-23f3dceb7854"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Pagamento",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"valor\": 100.00,\r\n  \"projetoId\": \"9f2510a9-9909-40ce-bfc1-773ae3069465\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/pagamentos/4c3671c6-eafe-4072-aa8a-23f3dceb7854",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pagamentos",
+						"4c3671c6-eafe-4072-aa8a-23f3dceb7854"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter status do Contador",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
