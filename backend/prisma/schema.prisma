@@ -31,7 +31,9 @@ model Freelancer {
   email     String    @unique
   senha     String
   criadoEm  DateTime  @default(now()) @map("criado_em")
+
   projetos  Projeto[]
+  clientes  Cliente[]
 
   @@map("freelancer")
 }
@@ -42,6 +44,9 @@ model Cliente {
   email     String    @unique
   telefone  String?
   criadoEm  DateTime  @default(now()) @map("criado_em")
+  freelancerId  String   @map("freelancer_id")
+
+  freelancer    Freelancer @relation(fields: [freelancerId], references: [id], onDelete: Cascade)
   projetos  Projeto[]
 
   @@map("cliente")
