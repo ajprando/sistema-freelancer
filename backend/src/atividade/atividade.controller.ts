@@ -9,12 +9,16 @@ import {
   HttpCode,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { AtividadeService } from './atividade.service';
 import { CreateAtividadeDto } from './dto/create-atividade.dto';
 import { UpdateAtividadeDto } from './dto/update-atividade.dto';
+import { JwtGuard } from '../auth/guards/jwt.guards';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('atividades')
+@UseGuards(JwtGuard)
 export class AtividadeController {
   constructor(private readonly atividadeService: AtividadeService) {}
 
@@ -25,6 +29,7 @@ export class AtividadeController {
   }
 
   @Get()
+  @Roles('FREELANCER')
   findAll(@Query('projetoId') projetoId?: string) {
     if (projetoId) {
       return this.atividadeService.findByProjeto(projetoId);

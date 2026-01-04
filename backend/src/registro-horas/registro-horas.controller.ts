@@ -9,12 +9,16 @@ import {
   HttpCode,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { RegistroHorasService } from './registro-horas.service';
 import { CreateRegistroHorasDto } from './dto/create-registro-horas.dto';
 import { UpdateRegistroHorasDto } from './dto/update-registro-horas.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guards';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('registro-horas')
+@UseGuards(JwtGuard)
 export class RegistroHorasController {
   constructor(private readonly registroHorasService: RegistroHorasService) {}
 
@@ -25,6 +29,7 @@ export class RegistroHorasController {
   }
 
   @Get()
+  @Roles('FREELANCER')
   findAll(@Query('atividadeId') atividadeId?: string) {
     if (atividadeId) {
       return this.registroHorasService.findByAtividade(atividadeId);

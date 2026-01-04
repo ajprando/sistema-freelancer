@@ -9,13 +9,17 @@ import {
   HttpCode,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { PagamentoService } from './pagamento.service';
 import { CreatePagamentoDto } from './dto/create-pagamento.dto';
 import { UpdatePagamentoDto } from './dto/update-pagamento.dto';
 import { PagamentoStatus } from '@prisma/client';
+import { JwtGuard } from 'src/auth/guards/jwt.guards';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('pagamentos')
+@UseGuards(JwtGuard)
 export class PagamentoController {
   constructor(private readonly pagamentoService: PagamentoService) {}
 
@@ -26,6 +30,7 @@ export class PagamentoController {
   }
 
   @Get()
+  @Roles('FREELANCER', 'CLIENTE')
   findAll(
     @Query('projetoId') projetoId?: string,
     @Query('status') status?: PagamentoStatus,

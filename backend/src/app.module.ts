@@ -9,6 +9,7 @@ import { AtividadeModule } from './atividade/atividade.module';
 import { RegistroHorasModule } from './registro-horas/registro-horas.module';
 import { PagamentoModule } from './pagamento/pagamento.module';
 import { ContadorModule } from './contador/contador.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { ContadorModule } from './contador/contador.module';
     AtividadeModule, 
     RegistroHorasModule, 
     PagamentoModule, 
-    ContadorModule
+    ContadorModule, AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

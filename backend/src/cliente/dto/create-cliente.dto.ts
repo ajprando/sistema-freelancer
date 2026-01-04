@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsOptional, MaxLength } from 'class-validator';
+import { IsString, IsEmail, IsOptional, MaxLength, IsUUID, IsNotEmpty } from 'class-validator';
 
 export class CreateClienteDto {
   @IsString()
@@ -12,4 +12,8 @@ export class CreateClienteDto {
   @IsOptional()
   @MaxLength(20, { message: 'Telefone deve ter no máximo 20 caracteres' })
   telefone?: string;
+
+  @IsUUID('4', { message: 'freelancerId deve ser um UUID válido' })
+  @IsNotEmpty({ message: 'freelancerId é obrigatório' })
+  freelancerId: string;
 }
