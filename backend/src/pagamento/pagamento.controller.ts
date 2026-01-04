@@ -9,13 +9,16 @@ import {
   HttpCode,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { PagamentoService } from './pagamento.service';
 import { CreatePagamentoDto } from './dto/create-pagamento.dto';
 import { UpdatePagamentoDto } from './dto/update-pagamento.dto';
 import { PagamentoStatus } from '@prisma/client';
+import { JwtGuard } from 'src/auth/guards/jwt.guards';
 
 @Controller('pagamentos')
+@UseGuards(JwtGuard)
 export class PagamentoController {
   constructor(private readonly pagamentoService: PagamentoService) {}
 

@@ -9,12 +9,15 @@ import {
   HttpCode,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { RegistroHorasService } from './registro-horas.service';
 import { CreateRegistroHorasDto } from './dto/create-registro-horas.dto';
 import { UpdateRegistroHorasDto } from './dto/update-registro-horas.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guards';
 
 @Controller('registro-horas')
+@UseGuards(JwtGuard)
 export class RegistroHorasController {
   constructor(private readonly registroHorasService: RegistroHorasService) {}
 

@@ -9,12 +9,15 @@ import {
   HttpCode,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { AtividadeService } from './atividade.service';
 import { CreateAtividadeDto } from './dto/create-atividade.dto';
 import { UpdateAtividadeDto } from './dto/update-atividade.dto';
+import { JwtGuard } from '../auth/guards/jwt.guards';
 
 @Controller('atividades')
+@UseGuards(JwtGuard)
 export class AtividadeController {
   constructor(private readonly atividadeService: AtividadeService) {}
 

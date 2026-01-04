@@ -9,12 +9,15 @@ import {
   HttpCode,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ProjetoService } from './projeto.service';
 import { CreateProjetoDto } from './dto/create-projeto.dto';
 import { UpdateProjetoDto } from './dto/update-projeto.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guards';
 
 @Controller('projetos')
+@UseGuards(JwtGuard)
 export class ProjetoController {
   constructor(private readonly projetoService: ProjetoService) {}
 

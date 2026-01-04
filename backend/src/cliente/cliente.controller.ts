@@ -8,12 +8,15 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guards';
 
 @Controller('clientes')
+@UseGuards(JwtGuard)
 export class ClienteController {
   constructor(private readonly clienteService: ClienteService) {}
 
