@@ -14,6 +14,7 @@ import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 import { JwtGuard } from 'src/auth/guards/jwt.guards';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('clientes')
 @UseGuards(JwtGuard)
@@ -27,6 +28,7 @@ export class ClienteController {
   }
 
   @Get()
+  @Roles('FREELANCER')
   findAll() {
     return this.clienteService.findAll();
   }

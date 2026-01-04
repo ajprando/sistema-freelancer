@@ -15,6 +15,7 @@ import { ProjetoService } from './projeto.service';
 import { CreateProjetoDto } from './dto/create-projeto.dto';
 import { UpdateProjetoDto } from './dto/update-projeto.dto';
 import { JwtGuard } from 'src/auth/guards/jwt.guards';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('projetos')
 @UseGuards(JwtGuard)
@@ -28,6 +29,7 @@ export class ProjetoController {
   }
 
   @Get()
+  @Roles('FREELANCER')
   findAll(
     @Query('freelancerId') freelancerId?: string,
     @Query('clienteId') clienteId?: string,
