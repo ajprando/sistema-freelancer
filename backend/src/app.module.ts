@@ -10,6 +10,7 @@ import { RegistroHorasModule } from './registro-horas/registro-horas.module';
 import { PagamentoModule } from './pagamento/pagamento.module';
 import { ContadorModule } from './contador/contador.module';
 import { AuthModule } from './auth/auth.module';
+import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { AuthModule } from './auth/auth.module';
     AtividadeModule, 
     RegistroHorasModule, 
     PagamentoModule, 
-    ContadorModule, AuthModule
+    ContadorModule, AuthModule, MercadoPagoModule
   ],
   controllers: [AppController],
   providers: [AppService],
