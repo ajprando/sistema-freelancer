@@ -23,11 +23,11 @@ import { Roles } from 'src/auth/decorators/roles.decorator';
 export class PagamentoController {
   constructor(private readonly pagamentoService: PagamentoService) {}
 
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
-  create(@Body() createPagamentoDto: CreatePagamentoDto) {
-    return this.pagamentoService.create(createPagamentoDto);
+  @Post(':projetoId')
+  async criar(@Param('projetoId') projetoId: string) {
+    return this.pagamentoService.criarPagamento(projetoId);
   }
+
 
   @Get()
   @Roles('FREELANCER', 'CLIENTE')

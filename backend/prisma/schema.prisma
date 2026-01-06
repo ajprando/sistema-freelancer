@@ -103,14 +103,20 @@ model RegistroHoras {
 }
 
 model Pagamento {
-  id         String           @id @default(uuid())
-  valor      Decimal          @db.Decimal(10, 2)
-  status     PagamentoStatus  @default(PENDENTE)
-  codigoPix  String?          @map("codigo_pix")
-  criadoEm   DateTime         @default(now()) @map("criado_em")
-  projetoId  String           @unique @map("projeto_id")
-  
-  projeto    Projeto          @relation(fields: [projetoId], references: [id], onDelete: Cascade)
+  id              String           @id @default(uuid())
+  referencia      String           @unique
+  valor           Decimal          @db.Decimal(10, 2)
+  status          PagamentoStatus  @default(PENDENTE)
+  metodo          String
+
+  codigoPix       String?          @map("codigo_pix")
+  mercadoPagoId   String?          @unique @map("mercado_pago_id")
+
+  criadoEm        DateTime         @default(now()) @map("criado_em")
+  projetoId       String           @unique @map("projeto_id")
+
+  projeto         Projeto          @relation(fields: [projetoId], references: [id], onDelete: Cascade)
 
   @@map("pagamento")
 }
+

@@ -2,15 +2,19 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePagamentoDto } from './dto/create-pagamento.dto';
 import { UpdatePagamentoDto } from './dto/update-pagamento.dto';
-import { PagamentoStatus } from '@prisma/client';
+import { Prisma, PagamentoStatus } from '@prisma/client';
+import { MercadoPagoService } from 'src/mercado-pago/mercado-pago.service';
 
 @Injectable()
 export class PagamentoService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private mercadoPagoService: MercadoPagoService,
+) {}
 
-  async create(createPagamentoDto: CreatePagamentoDto) {
+  async criarPagamento(projetoId: string) {
     const projeto = await this.prisma.projeto.findUnique({
-      where: { id: createPagamentoDto.projetoId },
+      where: { id: projetoId },
     });
 
     if (!projeto) {
@@ -18,30 +22,41 @@ export class PagamentoService {
     }
 
     const pagamentoExistente = await this.prisma.pagamento.findUnique({
-      where: { projetoId: createPagamentoDto.projetoId },
+      where: { projetoId },
     });
 
     if (pagamentoExistente) {
-      throw new ConflictException('Já existe um pagamento para este projeto');
+      throw new ConflictException('Já existe pagamento para este projeto');
     }
 
-    return this.prisma.pagamento.create({
+    const pagamento = await this.prisma.pagamento.create({
       data: {
-        valor: createPagamentoDto.valor,
-        projetoId: createPagamentoDto.projetoId,
-        status: createPagamentoDto.status || PagamentoStatus.PENDENTE,
-        codigoPix: createPagamentoDto.codigoPix,
-      },
-      include: {
-        projeto: {
-          include: {
-            freelancer: true,
-            cliente: true,
-          },
-        },
+        referencia: `PAG-${Date.now()}`,
+        metodo: 'LINK_MP',
+        valor: 150.0,
+        status: PagamentoStatus.PENDENTE,
+        projetoId,
       },
     });
+
+    const link = await this.mercadoPagoService.criarLinkPagamento({
+      referencia: pagamento.referencia,
+      valor: Number(pagamento.valor),
+    });
+
+    await this.prisma.pagamento.update({
+      where: { id: pagamento.id },
+      data: {
+        mercadoPagoId: link.mercadoPagoId,
+      },
+    });
+
+    return {
+      pagamento,
+      linkPagamento: link.initPoint,
+    };
   }
+
 
   async findAll() {
     return this.prisma.pagamento.findMany({

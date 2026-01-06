@@ -1,5 +1,4 @@
-import { IsDecimal, IsUUID, IsOptional, IsEnum, MaxLength } from 'class-validator';
-import { PagamentoStatus } from '@prisma/client';
+import { IsUUID, IsDecimal } from 'class-validator';
 
 export class CreatePagamentoDto {
   @IsDecimal({ decimal_digits: '1,2' })
@@ -7,12 +6,4 @@ export class CreatePagamentoDto {
 
   @IsUUID()
   projetoId: string;
-
-  @IsEnum(PagamentoStatus)
-  @IsOptional()
-  status?: PagamentoStatus;
-
-  @IsOptional()
-  @MaxLength(255, { message: 'Código PIX deve ter no máximo 255 caracteres' })
-  codigoPix?: string;
 }
