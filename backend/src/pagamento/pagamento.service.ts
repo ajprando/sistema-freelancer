@@ -27,6 +27,8 @@ export class PagamentoService {
 
     return this.prisma.pagamento.create({
       data: {
+        referencia: `PAG-${Date.now()}`, 
+        metodo: 'PIX',
         valor: createPagamentoDto.valor,
         projetoId: createPagamentoDto.projetoId,
         status: createPagamentoDto.status || PagamentoStatus.PENDENTE,
