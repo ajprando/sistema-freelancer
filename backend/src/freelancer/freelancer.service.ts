@@ -2,6 +2,7 @@ import { Injectable, ConflictException, NotFoundException } from '@nestjs/common
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateFreelancerDto } from './dto/create-freelancer.dto';
 import { UpdateFreelancerDto } from './dto/update-freelancer.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class FreelancerService {
@@ -55,6 +56,11 @@ export class FreelancerService {
       if (existingFreelancer) {
         throw new ConflictException('Email já está em uso');
       }
+    }
+
+    if (updateFreelancerDto.senha) {
+      const saltRounds = 10;
+      updateFreelancerDto.senha = await bcrypt.hash(updateFreelancerDto.senha, saltRounds);
     }
 
     return this.prisma.freelancer.update({
