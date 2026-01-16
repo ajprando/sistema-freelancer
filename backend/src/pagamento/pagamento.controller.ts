@@ -19,18 +19,19 @@ import { JwtGuard } from 'src/auth/guards/jwt.guards';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('pagamentos')
-@UseGuards(JwtGuard)
 export class PagamentoController {
   constructor(private readonly pagamentoService: PagamentoService) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @UseGuards(JwtGuard)
   create(@Body() createPagamentoDto: CreatePagamentoDto) {
     return this.pagamentoService.create(createPagamentoDto);
   }
 
   @Get()
   @Roles('FREELANCER', 'CLIENTE')
+  @UseGuards(JwtGuard)
   findAll(
     @Query('projetoId') projetoId?: string,
     @Query('status') status?: PagamentoStatus,
@@ -47,11 +48,13 @@ export class PagamentoController {
   }
 
   @Get(':id')
+  @UseGuards(JwtGuard)
   findOne(@Param('id') id: string) {
     return this.pagamentoService.findOne(id);
   }
 
   @Patch(':id')
+  @UseGuards(JwtGuard)
   update(
     @Param('id') id: string,
     @Body() updatePagamentoDto: UpdatePagamentoDto,
@@ -61,7 +64,20 @@ export class PagamentoController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(JwtGuard)
   remove(@Param('id') id: string) {
     return this.pagamentoService.remove(id);
+  }
+
+  @Post('webhook')
+  @HttpCode(HttpStatus.OK)
+  handleWebhook(@Body() payload: { data?: { id?: string | number } }) {
+    return this.pagamentoService.handleWebhook(payload);
+  }
+
+  @Post('abacatepay/webhook')
+  @HttpCode(HttpStatus.OK)
+  handleAbacatePayWebhook(@Body() payload: { data?: { id?: string } }) {
+    return this.pagamentoService.handleAbacatePayWebhook(payload);
   }
 }

@@ -15,6 +15,11 @@ export class CreateClienteDto {
 
   @IsString()
   @IsOptional()
+  @MaxLength(20, { message: 'Tax ID deve ter no máximo 20 caracteres' })
+  taxId?: string;
+
+  @IsString()
+  @IsOptional()
   @MinLength(6, { message: 'Senha deve ter no mínimo 6 caracteres' })
   @MaxLength(255, { message: 'Senha deve ter no máximo 255 caracteres' })
   senha?: string; 
