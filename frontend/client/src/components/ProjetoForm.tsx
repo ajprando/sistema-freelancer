@@ -19,8 +19,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useProjetos, Projeto } from '@/hooks/useProjetos';
-import { useClientes } from '@/hooks/useClientes';
+import { useClientes, Cliente } from '@/hooks/useClientes';
 import { useAuth } from '@/contexts/AuthContext';
+import apiClient from '@/lib/api';
 import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -42,6 +43,8 @@ export default function ProjetoForm({ projeto, isOpen, onClose }: ProjetoFormPro
     valorTotal: '',
     status: 'EM_ANDAMENTO' as 'EM_ANDAMENTO' | 'FINALIZADO' | 'CANCELADO',
     clienteId: '',
+    taxId: '',
+    telefone: '',
   });
 
   useEffect(() => {
@@ -52,6 +55,8 @@ export default function ProjetoForm({ projeto, isOpen, onClose }: ProjetoFormPro
         valorTotal: projeto.valorTotal.toString(),
         status: projeto.status,
         clienteId: projeto.clienteId,
+        taxId: projeto.cliente?.taxId || '',
+        telefone: projeto.cliente?.telefone || '',
       });
     } else if (isOpen) {
       setFormData({
@@ -60,6 +65,8 @@ export default function ProjetoForm({ projeto, isOpen, onClose }: ProjetoFormPro
         valorTotal: '',
         status: 'EM_ANDAMENTO',
         clienteId: '',
+        taxId: '',
+        telefone: '',
       });
     }
   }, [projeto, isOpen]);
@@ -75,6 +82,15 @@ export default function ProjetoForm({ projeto, isOpen, onClose }: ProjetoFormPro
         valorTotal: parseFloat(formData.valorTotal) || 0,
         freelancerId: user.id,
       } as any;
+
+      // Se o cliente já existe, atualizamos os dados dele (taxId e telefone)
+      // O backend do AbacatePay exige esses dados
+      if (formData.clienteId) {
+        await apiClient.patch(`/clientes/${formData.clienteId}`, {
+          taxId: formData.taxId,
+          telefone: formData.telefone,
+        });
+      }
 
       if (projeto) {
         await updateProjeto(projeto.id, data);
@@ -155,7 +171,15 @@ export default function ProjetoForm({ projeto, isOpen, onClose }: ProjetoFormPro
               <Label htmlFor="cliente">Cliente</Label>
               <Select
                 value={formData.clienteId}
-                onValueChange={(value) => setFormData({ ...formData, clienteId: value })}
+                onValueChange={(value) => {
+                  const selectedCliente = clientes.find(c => c.id === value);
+                  setFormData({ 
+                    ...formData, 
+                    clienteId: value,
+                    taxId: selectedCliente?.taxId || '',
+                    telefone: selectedCliente?.telefone || ''
+                  });
+                }}
                 required
               >
                 <SelectTrigger>
@@ -170,6 +194,38 @@ export default function ProjetoForm({ projeto, isOpen, onClose }: ProjetoFormPro
                 </SelectContent>
               </Select>
             </div>
+
+            {formData.clienteId && (
+              <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-900/30 p-3 rounded-lg space-y-3">
+                <p className="text-[10px] font-medium text-amber-800 dark:text-amber-300">
+                  Dados obrigatórios para cobrança via AbacatePay:
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="taxId" className="text-[10px]">CPF/CNPJ</Label>
+                    <Input
+                      id="taxId"
+                      value={formData.taxId}
+                      onChange={(e) => setFormData({ ...formData, taxId: e.target.value })}
+                      placeholder="000.000.000-00"
+                      className="h-8 text-xs"
+                      required
+                    />
+                  </div>
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="telefone" className="text-[10px]">Telefone</Label>
+                    <Input
+                      id="telefone"
+                      value={formData.telefone}
+                      onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
+                      placeholder="(00) 00000-0000"
+                      className="h-8 text-xs"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={onClose}>

@@ -44,18 +44,18 @@ export default function Pagamentos() {
 
   const stats = useMemo(() => {
     const totalRecebido = pagamentos
-      .filter(p => p.status === 'PAGO')
+      .filter(p => (p.status as string) === 'PAGO' || (p.status as string) === 'PAID')
       .reduce((acc, curr) => acc + Number(curr.valor), 0);
     
     const totalPendente = pagamentos
-      .filter(p => p.status === 'PENDENTE')
+      .filter(p => (p.status as string) === 'PENDENTE' || (p.status as string) === 'PENDING')
       .reduce((acc, curr) => acc + Number(curr.valor), 0);
 
     const faturamentoMes = pagamentos
       .filter(p => {
         const data = new Date(p.criadoEm);
         const hoje = new Date();
-        return p.status === 'PAGO' && 
+        return ((p.status as string) === 'PAGO' || (p.status as string) === 'PAID') && 
                data.getMonth() === hoje.getMonth() && 
                data.getFullYear() === hoje.getFullYear();
       })
@@ -111,11 +111,15 @@ export default function Pagamentos() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'PAGO':
+      case 'PAID':
         return <Badge className="bg-emerald-100 text-emerald-800 border-emerald-200">Pago</Badge>;
       case 'PENDENTE':
+      case 'PENDING':
         return <Badge className="bg-amber-100 text-amber-800 border-amber-200">Pendente</Badge>;
       case 'FALHOU':
-        return <Badge className="bg-rose-100 text-rose-800 border-rose-200">Falhou</Badge>;
+      case 'EXPIRED':
+      case 'CANCELLED':
+        return <Badge className="bg-rose-100 text-rose-800 border-rose-200">Falhou/Cancelado</Badge>;
       default:
         return <Badge variant="outline">{status}</Badge>;
     }
@@ -251,7 +255,7 @@ export default function Pagamentos() {
                       </div>
 
                       <div className="flex items-center gap-2">
-                        {!isFreelancer && pagamento.status === 'PENDENTE' && (
+                        {!isFreelancer && ((pagamento.status as string) === 'PENDENTE' || (pagamento.status as string) === 'PENDING') && (
                           <Button 
                             size="sm" 
                             className="gap-2 bg-primary hover:bg-primary/90"
@@ -303,9 +307,10 @@ export default function Pagamentos() {
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
         pagamento={selectedPagamento}
-        onSuccess={() => {
+        onSuccess={async (pagamentoId: string) => {
+          await updatePagamento(pagamentoId, { status: 'PAID' });
           fetchPagamentos();
-          toast.success('Pagamento atualizado!');
+          toast.success('Pagamento simulado e atualizado com sucesso!');
         }}
       />
     </DashboardLayout>

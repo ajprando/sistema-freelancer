@@ -4,15 +4,22 @@ import apiClient from '@/lib/api';
 export interface Pagamento {
   id: string;
   valor: number;
-  status: 'PENDENTE' | 'PAGO' | 'FALHOU';
+  status: 'PENDENTE' | 'PAGO' | 'FALHOU' | 'PAID' | 'PENDING' | 'EXPIRED' | 'CANCELLED';
   codigoPix?: string;
+  qrCodeBase64?: string;
+  abacatePayId?: string;
+  gateway?: 'MERCADO_PAGO' | 'ABACATEPAY';
   criadoEm: string;
   projetoId: string;
-  projeto?: {
+    projeto?: {
     id: string;
     nome: string;
     cliente?: {
+      id: string;
       nome: string;
+      email: string;
+      taxId?: string;
+      telefone?: string;
     };
   };
 }

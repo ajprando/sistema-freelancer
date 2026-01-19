@@ -11,8 +11,11 @@ export interface Projeto {
   freelancerId: string;
   clienteId: string;
   cliente?: {
+    id: string;
     nome: string;
     email: string;
+    taxId?: string;
+    telefone?: string;
   };
 }
 

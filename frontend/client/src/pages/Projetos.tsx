@@ -113,7 +113,7 @@ export default function Projetos() {
           <div>
             <h1 className="text-3xl font-bold text-foreground tracking-tight">Projetos</h1>
             <p className="text-muted-foreground mt-1">
-              {isFreelancer ? "Gerencie seus projetos e clientes" : "Acompanhe o progresso dos seus projetos contratados."}
+              {isFreelancer ? "Gerencie seus projetos e clientes." : "Acompanhe o progresso dos seus projetos contratados."}
             </p>
           </div>
           {isFreelancer && (
