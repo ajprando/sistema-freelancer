@@ -116,31 +116,44 @@ export class ProjetoService {
   }
 
   async update(id: string, updateProjetoDto: UpdateProjetoDto) {
-    await this.findOne(id);
+    const { taxId, telefone, clienteId, freelancerId, ...projetoData } = updateProjetoDto;
 
-    if (updateProjetoDto.freelancerId) {
-      const freelancer = await this.prisma.freelancer.findUnique({
-        where: { id: updateProjetoDto.freelancerId },
-      });
+    const projetoExistente = await this.findOne(id);
 
-      if (!freelancer) {
-        throw new NotFoundException('Freelancer não encontrado');
-      }
-    }
-
-    if (updateProjetoDto.clienteId) {
+    if (taxId !== undefined || telefone !== undefined) {
+      const clienteIdToUpdate = clienteId || projetoExistente.clienteId;
       const cliente = await this.prisma.cliente.findUnique({
-        where: { id: updateProjetoDto.clienteId },
+        where: { id: clienteIdToUpdate },
       });
 
       if (!cliente) {
         throw new NotFoundException('Cliente não encontrado');
       }
+
+      await this.prisma.cliente.update({
+        where: { id: clienteIdToUpdate },
+        data: {
+          taxId: taxId !== undefined ? taxId : cliente.taxId,
+          telefone: telefone !== undefined ? telefone : cliente.telefone,
+        },
+      });
+    }
+
+    const dataToUpdate: any = projetoData;
+
+    if (clienteId) {
+      dataToUpdate.cliente = { connect: { id: clienteId } };
+      delete dataToUpdate.clienteId;
+    }
+
+    if (freelancerId) {
+      dataToUpdate.freelancer = { connect: { id: freelancerId } };
+      delete dataToUpdate.freelancerId;
     }
 
     return this.prisma.projeto.update({
       where: { id },
-      data: updateProjetoDto,
+      data: dataToUpdate,
       include: {
         freelancer: true,
         cliente: true,
