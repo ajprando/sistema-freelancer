@@ -8,8 +8,10 @@ export class ProjetoService {
   constructor(private prisma: PrismaService) {}
 
   async create(createProjetoDto: CreateProjetoDto) {
+    const { taxId, telefone, ...projetoData } = createProjetoDto;
+
     const freelancer = await this.prisma.freelancer.findUnique({
-      where: { id: createProjetoDto.freelancerId },
+      where: { id: projetoData.freelancerId },
     });
 
     if (!freelancer) {
@@ -17,15 +19,25 @@ export class ProjetoService {
     }
 
     const cliente = await this.prisma.cliente.findUnique({
-      where: { id: createProjetoDto.clienteId },
+      where: { id: projetoData.clienteId },
     });
 
     if (!cliente) {
       throw new NotFoundException('Cliente não encontrado');
     }
 
+    if (taxId || telefone) {
+      await this.prisma.cliente.update({
+        where: { id: projetoData.clienteId },
+        data: {
+          taxId: taxId || cliente.taxId,
+          telefone: telefone || cliente.telefone,
+        },
+      });
+    }
+
     return this.prisma.projeto.create({
-      data: createProjetoDto,
+      data: projetoData,
       include: {
         freelancer: true,
         cliente: true,

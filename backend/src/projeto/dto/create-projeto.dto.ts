@@ -15,6 +15,16 @@ export class CreateProjetoDto {
   @IsUUID()
   clienteId: string;
 
+  @IsString()
+  @IsOptional()
+  @MaxLength(20, { message: 'Telefone deve ter no máximo 20 caracteres' })
+  telefone?: string;
+
+  @IsString()
+  @IsOptional()
+  @MaxLength(20, { message: 'Tax ID deve ter no máximo 20 caracteres' })
+  taxId?: string;
+
   @IsNumber({ maxDecimalPlaces: 2 })
   @Min(0)
   @IsOptional()
