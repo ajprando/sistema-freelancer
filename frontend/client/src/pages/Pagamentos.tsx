@@ -15,7 +15,8 @@ import {
   MoreHorizontal,
   ArrowUpRight,
   Calendar,
-  CreditCard
+  CreditCard,
+  Plus
 } from 'lucide-react';
 import { usePagamentos, Pagamento } from '@/hooks/usePagamentos';
 import { useAuth } from '@/contexts/AuthContext';
@@ -28,6 +29,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import CheckoutPixModal from '@/components/CheckoutPixModal';
+import PagamentoFormModal from '@/components/PagamentoFormModal';
 import { toast } from 'sonner';
 import { useLocation } from 'wouter';
 
@@ -41,6 +43,7 @@ export default function Pagamentos() {
   const [statusFilter, setStatusFilter] = useState<string>('todos');
   const [selectedPagamento, setSelectedPagamento] = useState<Pagamento | null>(null);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const stats = useMemo(() => {
     const totalRecebido = pagamentos
@@ -128,12 +131,18 @@ export default function Pagamentos() {
   return (
     <DashboardLayout>
       <div className="p-6 space-y-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold text-foreground tracking-tight">Pagamentos</h1>
-            <p className="text-muted-foreground mt-1">Gestão financeira e faturamento de projetos.</p>
-          </div>
-        </div>
+	        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+	          <div>
+	            <h1 className="text-3xl font-bold text-foreground tracking-tight">Pagamentos</h1>
+	            <p className="text-muted-foreground mt-1">Gestão financeira e faturamento de projetos.</p>
+	          </div>
+	          {isFreelancer && (
+	            <Button onClick={() => setIsFormOpen(true)} className="gap-2">
+	              <Plus className="w-4 h-4" />
+	              Nova Cobrança
+	            </Button>
+	          )}
+	        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card className="bg-emerald-50/50 dark:bg-emerald-950/10 border-emerald-100 dark:border-emerald-900/30">
@@ -312,7 +321,18 @@ export default function Pagamentos() {
           fetchPagamentos();
           toast.success('Pagamento simulado e atualizado com sucesso!');
         }}
-      />
-    </DashboardLayout>
-  );
-}
+	      />
+
+	      {isFreelancer && (
+	        <PagamentoFormModal
+	          isOpen={isFormOpen}
+	          onClose={() => setIsFormOpen(false)}
+	          onSuccess={() => {
+	            fetchPagamentos();
+	            toast.success('Cobrança criada com sucesso!');
+	          }}
+	        />
+	      )}
+	    </DashboardLayout>
+	  );
+	}
