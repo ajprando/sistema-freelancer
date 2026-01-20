@@ -9,7 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { usePagamentos } from '@/hooks/usePagamentos';
+import { Pagamento, usePagamentos } from '@/hooks/usePagamentos';
 import { useProjetos } from '@/hooks/useProjetos';
 import { useCalculoPagamento } from '@/hooks/useCalculoPagamento';
 import { toast } from 'sonner';
@@ -19,11 +19,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 interface PagamentoFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSuccess: () => void;
+  onSuccess: (pagamento: Pagamento) => void;
 }
 
 export default function PagamentoFormModal({ isOpen, onClose, onSuccess }: PagamentoFormModalProps) {
   const [projetoId, setProjetoId] = useState<string>('');
+  const [gateway, setGateway] = useState<'MERCADO_PAGO' | 'ABACATEPAY'>('ABACATEPAY');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { createPagamento } = usePagamentos();
@@ -46,14 +47,15 @@ export default function PagamentoFormModal({ isOpen, onClose, onSuccess }: Pagam
     setIsSubmitting(true);
     try {
      
-      await createPagamento({
+      const pagamento = await createPagamento({
         projetoId,
         valor: valorTotal,
-        status: 'PENDENTE', 
+        status: 'PENDENTE',
+        gateway,
       });
 
       toast.success('Cobrança criada com sucesso!');
-      onSuccess();
+      onSuccess(pagamento);
       onClose();
     } catch (error) {
       console.error(error);
@@ -84,6 +86,23 @@ export default function PagamentoFormModal({ isOpen, onClose, onSuccess }: Pagam
                     {projeto.nome} ({projeto.cliente?.nome})
                   </SelectItem>
                 ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="gateway">Gateway</Label>
+            <Select
+              onValueChange={(value) => setGateway(value as 'MERCADO_PAGO' | 'ABACATEPAY')}
+              value={gateway}
+              disabled={isLoading || isSubmitting}
+            >
+              <SelectTrigger id="gateway">
+                <SelectValue placeholder="Selecione o gateway" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ABACATEPAY">AbacatePay</SelectItem>
+                <SelectItem value="MERCADO_PAGO">Mercado Pago</SelectItem>
               </SelectContent>
             </Select>
           </div>
