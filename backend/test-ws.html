@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>WebSocket Contador Test</h1>
+    <div id="status">Desconectado</div>
+    <div id="timerDisplay">00:00:00</div>
+    <button id="startButton" onclick="startTimer( )">Iniciar</button>
+    <button id="stopButton" onclick="stopTimer()" disabled>Parar</button>
+    <div id="log" style="border: 1px solid black; padding: 10px; margin-top: 20px; height: 200px; overflow-y: auto;"></div>
+
+    <script>
+        const socket = io('http://localhost:3000', {
+            reconnection: true,
+            reconnectionDelay: 1000,
+            reconnectionDelayMax: 5000,
+            reconnectionAttempts: 5
+        } );
+
+        let timerInterval;
+        let startTime = null;
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+
+        // Cronometro 
+        function updateTimer() {
+            if (!startTime) return;
+            const now = new Date();
+            const elapsedMilliseconds = now - startTime;
+            const totalSeconds = Math.floor(elapsedMilliseconds / 1000);
+
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            const format = (num) => String(num).padStart(2, '0');
+            timerDisplay.innerText = `${format(hours)}:${format(minutes)}:${format(seconds)}`;
+        }
+
+        function startLocalTimer(time) {
+            startTime = new Date(time);
+            timerInterval = setInterval(updateTimer, 1000);
+            startButton.disabled = true;
+            stopButton.disabled = false;
+            addLog(`Cronômetro iniciado em: ${startTime.toLocaleTimeString()}`);
+        }
+
+        function stopLocalTimer() {
+            clearInterval(timerInterval);
+            startTime = null;
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            addLog(`Cronômetro parado.`);
+        }
+
+        // Comunicação backend
+        function startTimer() {
+            addLog('Enviando: startTimer');
+            socket.emit('startTimer', {});
+        }
+
+        function stopTimer() {
+            addLog('Enviando: stopTimer');
+            socket.emit('stopTimer', {});
+        }
+
+        // Eventos websocket
+        socket.on('connect', () => {
+            document.getElementById('status').innerText = 'Conectado';
+            addLog('Conectado ao WebSocket');
+        });
+
+        socket.on('timerStarted', (data) => {
+            console.log('Evento timerStarted recebido:', data);
+            startLocalTimer(data.startTime);
+        });
+
+        socket.on('timerStopped', (data) => {
+            console.log('Evento timerStopped recebido:', data);
+            stopLocalTimer();
+        });
+
+        socket.on('disconnect', () => {
+            document.getElementById('status').innerText = 'Desconectado';
+            addLog('Desconectado do WebSocket');
+        });
+
+        socket.on('connect_error', (error) => {
+            addLog(`Erro de conexão: ${error}`);
+            console.error('Erro de conexão:', error);
+        });
+
+        function addLog(msg) {
+            const log = document.getElementById('log');
+            const p = document.createElement('p');
+            p.innerText = msg;
+            log.appendChild(p);
+            log.scrollTop = log.scrollHeight;
+        }
+    </script>
+</body>
+</html>

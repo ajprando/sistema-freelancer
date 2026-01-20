@@ -31,7 +31,9 @@ model Freelancer {
   email     String    @unique
   senha     String
   criadoEm  DateTime  @default(now()) @map("criado_em")
+
   projetos  Projeto[]
+  clientes  Cliente[]
 
   @@map("freelancer")
 }
@@ -41,7 +43,11 @@ model Cliente {
   nome      String
   email     String    @unique
   telefone  String?
+  taxId     String?   @map("tax_id")
   criadoEm  DateTime  @default(now()) @map("criado_em")
+  freelancerId  String   @map("freelancer_id")
+
+  freelancer    Freelancer @relation(fields: [freelancerId], references: [id], onDelete: Cascade)
   projetos  Projeto[]
 
   @@map("cliente")
@@ -98,12 +104,18 @@ model RegistroHoras {
 }
 
 model Pagamento {
-  id         String           @id @default(uuid())
-  valor      Decimal          @db.Decimal(10, 2)
-  status     PagamentoStatus  @default(PENDENTE)
-  codigoPix  String?          @map("codigo_pix")
-  criadoEm   DateTime         @default(now()) @map("criado_em")
-  projetoId  String           @unique @map("projeto_id")
+  id            String           @id @default(uuid())
+  referencia    String?          @map("referencia")
+  metodo        String           @default("PIX")
+  gateway       String           @default("MERCADO_PAGO")
+  valor         Decimal          @db.Decimal(10, 2)
+  status        PagamentoStatus  @default(PENDENTE)
+  codigoPix     String?          @map("codigo_pix")
+  qrCodeBase64  String?          @map("qr_code_base64")
+  mercadoPagoId String?          @unique @map("mercado_pago_id")
+  abacatePayId  String?          @unique @map("abacate_pay_id")
+  criadoEm      DateTime         @default(now()) @map("criado_em")
+  projetoId     String           @unique @map("projeto_id")
   
   projeto    Projeto          @relation(fields: [projetoId], references: [id], onDelete: Cascade)
 
