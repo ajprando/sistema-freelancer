@@ -11,8 +11,8 @@
 ### 💻 Desenvolvimento
 
 #### Back-end:
-  → https://github.com/ajprando/sistema-freelancer/tree/4645a6ccecdcd479c11ab6b410ec7974f028d862/backend
+  → https://github.com/ajprando/sistema-freelancer/tree/main/backend
 
  
 #### Front-end: 
-  → https://github.com/ajprando/sistema-freelancer/tree/4645a6ccecdcd479c11ab6b410ec7974f028d862/frontend
+  → https://github.com/ajprando/sistema-freelancer/tree/main/frontend
