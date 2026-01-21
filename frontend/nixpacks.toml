@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["nodejs_20", "openssl"]
+
+[phases.install]
+cmds = ["npx --yes pnpm install"]
+
+[phases.build]
+cmds = ["npx --yes pnpm run build"]
+
+[start]
+cmd = "npx --yes pnpm run start"
