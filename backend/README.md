@@ -1,98 +1,185 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 💻 Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Visão Geral
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Este backend é responsável por prover APIs REST e comunicação em tempo real para o **Sistema Freelancer**, incluindo autenticação, controle de acesso, persistência de dados e integrações externas. O projeto foi desenvolvido em **Node.js** utilizando **NestJS**, com **Prisma ORM** para acesso ao banco de dados.
 
-## Description
+## Principais Tecnologias
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+* **Node.js**
+* **NestJS**
+* **TypeScript**
+* **Prisma ORM**
+* **JWT** para autenticação
+* **WebSocket** para comunicação em tempo real
+* **PostgreSQL** (ou outro banco compatível configurado via Prisma)
 
-## Project setup
+## Estrutura de Pastas
 
-```bash
-$ npm install
+```
+backend/
+├─ src/                # Código-fonte principal
+├─ prisma/             # Schema e migrations do Prisma
+├─ dist/               # Build da aplicação
+├─ test-ws.html        # Página de teste para WebSocket
+├─ .env                # Variáveis de ambiente
+├─ package.json
+└─ tsconfig.json
 ```
 
-## Compile and run the project
+## Pré-requisitos
 
-```bash
-# development
-$ npm run start
+* Node.js (versão recomendada: LTS)
+* Gerenciador de pacotes (**npm** ou **pnpm**)
+* Banco de dados configurado (ex.: PostgreSQL)
 
-# watch mode
-$ npm run start:dev
+## Configuração do Ambiente
 
-# production mode
-$ npm run start:prod
-```
+1. Acesse a pasta do backend:
 
-## Run tests
+   ```bash
+   cd backend
+   ```
+2. Instale as dependências:
 
-```bash
-# unit tests
-$ npm run test
+   ```bash
+   npm install
+   # ou
+   pnpm install
+   ```
+3. Configure o arquivo `.env` com as variáveis necessárias, por exemplo:
 
-# e2e tests
-$ npm run test:e2e
+   ```env
+   DATABASE_URL=postgresql://usuario:senha@localhost:5432/sistema_freelancer
+   JWT_SECRET=sua_chave_secreta
+   ```
 
-# test coverage
-$ npm run test:cov
-```
 
-## Deployment
+## Endpoints API REST
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### Autenticação (/auth)
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- POST /auth/register — Cadastro de usuário
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+- POST /auth/login — Autenticação e geração de JWT
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Clientes (/clientes)
 
-## Resources
+- POST /clientes — Criar cliente
 
-Check out a few resources that may come in handy when working with NestJS:
+- GET /clientes — Listar clientes
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+- GET /clientes/:id — Buscar cliente por ID
 
-## Support
+- PATCH /clientes/:id — Atualizar cliente
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- DELETE /clientes/:id — Remover cliente
 
-## Stay in touch
+### Freelancers (/freelancers)
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- POST /freelancers — Criar freelancer
 
-## License
+- GET /freelancers — Listar freelancers
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- GET /freelancers/:id — Buscar freelancer por ID
+
+- PATCH /freelancers/:id — Atualizar freelancer
+
+- DELETE /freelancers/:id — Remover freelancer
+
+
+### Projetos (/projetos)
+
+- POST /projetos — Criar projeto
+
+- GET /projetos — Listar projetos
+
+- GET /projetos/:id — Buscar projeto por ID
+
+- PATCH /projetos/:id — Atualizar projeto
+
+- DELETE /projetos/:id — Remover projeto
+
+### Atividades (/atividades)
+
+- POST /atividades — Criar atividade
+
+- GET /atividades — Listar atividades
+
+- GET /atividades/:id — Buscar atividade por ID
+
+- PATCH /atividades/:id — Atualizar atividade
+
+- DELETE /atividades/:id — Remover atividade
+
+### Registro de Horas (/registro-horas)
+
+- POST /registro-horas — Registrar horas trabalhadas
+
+- GET /registro-horas — Listar registros
+
+- GET /registro-horas/:id — Buscar registro por ID
+
+- PATCH /registro-horas/:id — Atualizar registro
+
+- DELETE /registro-horas/:id — Remover registro
+
+### Pagamentos (/pagamentos)
+
+- POST /pagamentos — Criar pagamento
+
+- GET /pagamentos — Listar pagamentos
+
+- GET /pagamentos/:id — Buscar pagamento por ID
+
+- PATCH /pagamentos/:id — Atualizar pagamento
+
+- DELETE /pagamentos/:id — Remover pagamento
+
+- POST /pagamentos/webhook — Webhook de pagamento
+
+- POST /pagamentos/abacatepay/webhook — Webhook AbacatePay
+
+### Contador / Tempo Real (/contador)
+
+- GET /contador/status — Status do contador em tempo real
+
+
+## Banco de Dados (Prisma)
+
+* Gerar o cliente Prisma:
+
+  ```bash
+  npx prisma generate
+  ```
+* Executar migrations:
+
+  ```bash
+  npx prisma migrate dev
+  ```
+
+## Executando a Aplicação
+
+* Ambiente de desenvolvimento:
+
+  ```bash
+  npm run start:dev
+  ```
+* Build para produção:
+
+  ```bash
+  npm run build
+  npm run start:prod
+  ```
+
+
+## WebSocket
+
+O backend possui suporte a WebSocket para funcionalidades em tempo real. O arquivo `test-ws.html` pode ser utilizado para validar a conexão e eventos.
+
+## Boas Práticas
+
+* Manter variáveis sensíveis apenas no `.env`
+* Executar migrations antes de subir a aplicação
+* Seguir o padrão de módulos do NestJS
+
