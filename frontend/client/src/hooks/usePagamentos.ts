@@ -4,7 +4,7 @@ import apiClient from '@/lib/api';
 export interface Pagamento {
   id: string;
   valor: number;
-  status: 'PENDENTE' | 'PAGO' | 'FALHOU' | 'PAID' | 'PENDING' | 'EXPIRED' | 'CANCELLED';
+  status: 'PENDENTE' | 'PAGO' | 'FALHOU';
   codigoPix?: string;
   qrCodeBase64?: string;
   abacatePayId?: string;
