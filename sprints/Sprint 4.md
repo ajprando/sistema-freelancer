@@ -27,6 +27,21 @@
 * Diagrama de atividades - Cliente:  
   → https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20Atividade%20-%20Cliente.png
 
+* Diagrama de sequência - Login:  
+  → https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20sequencia%20-%20Login.png
+
+* Diagrama de sequência - Criar projeto:  
+  → https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20sequencia%20-%20Criar%20projeto.png
+
+* Diagrama de sequência - Registrar horas:  
+  → https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20sequencia%20-%20Registrar%20horas.png
+
+* Diagrama de sequência - Gerar pagamento:  
+  → https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20sequencia%20-%20Gerar%20pagamento.png
+
+* Diagrama de sequência - Realizar pagamento:  
+  → https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20sequencia%20-%20Realizar%20pagamento.png
+
 ### 📦 Deploy
 
 * Backend público:  
