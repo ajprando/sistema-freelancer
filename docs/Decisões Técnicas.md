@@ -18,6 +18,9 @@
 - [5. Integração com PIX](#5-integração-com-pix)
   - [5.1 Tecnologias](#51-tecnologias)
   - [5.2 Justificativa](#52-justificativa)
+- [6. Deploy e Infraestrutura](#6-deploy-e-infraestrutura)
+  - [6.1 Tecnologias](#61-tecnologias)
+  - [6.2 Justificativa](#62-justificativa)
 
 # 1. Back-end
 
@@ -65,8 +68,23 @@ Para a comunicação em tempo real, foi utilizada a tecnologia WebSocket, que é
 
 ## 5.1 Tecnologias
 
-<img src="https://img.shields.io/badge/-Mercado Pago-00B1EA?style=flat&logo=mercadopago&logoColor=white">
+<img src="https://img.shields.io/badge/Mercado%20Pago-00B1EA?style=flat&logo=mercadopago&logoColor=white">
+<img src="https://img.shields.io/badge/Abacate%20Pay-4CAF50?style=flat&logo=wallet&logoColor=white">
 
 ## 5.2 Justificativa
 
-Para a integração com o sistema de pagamentos via PIX, foi utilizado a API do Mercado Pago. Essa escolha se deu pela disponibilidade de suporte nativo ao PIX, pela existência de um plano gratuito adequado para fins acadêmicos e pela documentação clara e acessível. Além disso, o Mercado Pago oferece facilidade de integração com aplicações web, permitindo a geração e o acompanhamento do status de cobranças de forma simples e segura, atendendo plenamente aos requisitos funcionais do sistema.
+Para a integração com pagamentos via PIX, foram utilizadas as APIs do Mercado Pago e do Abacate Pay, ambas escolhidas por oferecerem suporte nativo ao PIX, documentação acessível e facilidade de integração com aplicações web. O Mercado Pago foi adotado por sua estabilidade e ampla utilização no mercado, enquanto o Abacate Pay foi incluído como uma alternativa mais simples, adequada ao contexto acadêmico do projeto. As duas soluções permitem a geração de cobranças, o armazenamento das informações de pagamento e o acompanhamento do status das transações, atendendo de forma eficiente aos requisitos de faturamento do sistema.
+
+# 6. Deploy e Infraestrutura
+
+## 6.1 Tecnologias
+
+<img src="https://img.shields.io/badge/Railway-0B0D0E?style=flat&logo=railway&logoColor=white">
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white">
+
+---
+
+## 6.2 Justificativa
+
+O deploy da aplicação foi realizado utilizando a plataforma Railway. Ele foi escolhido por oferecer uma solução simples e eficiente de *Platform as a Service (PaaS)*, com suporte nativo a aplicações Node.js e banco de dados PostgreSQL. A plataforma permite integração direta com o GitHub, possibilitando deploy automático a cada atualização do código, além da configuração centralizada de variáveis de ambiente, garantindo segurança e praticidade no gerenciamento da infraestrutura. Essa escolha atende adequadamente às necessidades do projeto, reduzindo a complexidade de deploy e manutenção.
+
