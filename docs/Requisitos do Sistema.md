@@ -18,31 +18,31 @@
 
 # 1. Requisitos Funcionais
 
-> Os requisitos funcionais descrevem o que o sistema deve fazer.
+Os requisitos funcionais descrevem as funcionalidades que o sistema deve disponibilizar aos usuários.
 
 ## RF01 - Gerenciar Clientes
 
-O sistema deve permitir cadastrar, listar, editar e remover clientes, garantindo que não existam clientes duplicados com o mesmo e-mail.
+O sistema deve permitir o cadastro, listagem, edição e remoção de clientes, garantindo que não existam clientes duplicados com o mesmo e-mail.
 
 ## RF02 - Gerenciar Projetos
 
-O sistema deve permitir o cadastro e gerenciamento de projetos associados a um cliente, contendo informações como nome, descrição, data de início e data de término.
+O sistema deve permitir o cadastro e gerenciamento de projetos associados a um cliente. Cada projeto deve conter, no mínimo, as seguintes informações: nome do projeto, descrição, data de início e data de término.
 
 ## RF03 - Gerenciar Atividades
 
-O sistema deve permitir o cadastro de atividades vinculadas a projetos, definindo descrição e valor por hora.
+O sistema deve permitir o cadastro, edição, listagem e remoção de atividades vinculadas a um projeto. Cada atividade deve conter uma descrição e o valor da hora trabalhada.
 
 ## RF04 - Registrar Horas Trabalhadas
 
-O sistema deve permitir registrar o tempo trabalhado em uma atividade, utilizando um cronômetro com atualização em tempo real via WebSocket.
+O sistema deve permitir o registro do tempo trabalhado em uma atividade por meio de um cronômetro. O tempo registrado deve ser atualizado em tempo real para o usuário, utilizando comunicação via WebSocket.
 
 ## RF05 - Realizar Pagamento via PIX
 
-O sistema deve permitir a geração de cobranças via PIX para projetos concluídos, bem como o acompanhamento do status do pagamento.
+O sistema deve permitir a geração de cobranças via PIX para projetos concluídos, bem como a consulta e o acompanhamento do status do pagamento (pendente, pago ou expirado).
 
 # 2. Requisitos Não Funcionais
 
-> Os requisitos não funcionais descrevem como o sistema deve se comportar.
+Os requisitos não funcionais descrevem critérios de qualidade, restrições técnicas e padrões que o sistema deve atender.
 
 ## RNF01 - Arquitetura
 
@@ -50,16 +50,16 @@ O sistema deve ser desenvolvido utilizando arquitetura baseada em serviços REST
 
 ## RNF02 - Banco de Dados
 
-O sistema deve utilizar um banco de dados relacional para persistência das informações.
+O sistema deve utilizar um banco de dados relacional para a persistência das informações, garantindo integridade referencial entre clientes, projetos, atividades e registros de horas.
 
 ## RNF03 - Desempenho
 
-As atualizações de tempo via WebSocket devem ocorrer em tempo real, com latência mínima perceptível ao usuário.
+As atualizações de tempo realizadas via WebSocket devem ocorrer em tempo real, com latência mínima perceptível ao usuário, garantindo uma experiência fluida durante o uso do cronômetro.
 
 ## RNF04 - Validação de Dados
 
-Todos os dados de entrada devem ser validados antes de serem persistidos no banco de dados.
+Todos os dados de entrada devem ser validados no backend antes de serem persistidos no banco de dados, assegurando consistência e integridade das informações.
 
 ## RNF05 - Segurança
 
-O sistema deve garantir que apenas usuários autorizados possam acessar e modificar os dados cadastrados.
+O sistema deve garantir que apenas usuários autenticados e autorizados possam acessar e modificar os dados cadastrados, respeitando as permissões definidas por perfil de acesso.
