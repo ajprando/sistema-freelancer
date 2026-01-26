@@ -42,10 +42,6 @@ Reúne toda a documentação do projeto.
  - **JSON do postman:**  
   → https://github.com/ajprando/sistema-freelancer/blob/main/docs/sistema-freelancer.postman_collection.json
 
-- **Descrição dos diagramas:**  
-  → link
-
-
 
 ### 📁 diagrams/
 Contém os diagramas do sistema.
