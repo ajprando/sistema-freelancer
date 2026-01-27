@@ -62,7 +62,7 @@ Contém os diagramas do sistema.
 
    → Criar projetos: https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20sequencia%20-%20Criar%20projeto.png
 
-   → Registrar horas: https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20sequencia%20-%20Gerar%20pagamento.png
+   → Registrar horas: https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20sequencia%20-%20Registrar%20horas.png
 
    → Gerar pagamento: https://github.com/ajprando/sistema-freelancer/blob/main/diagrams/Diagrama%20de%20sequencia%20-%20Gerar%20pagamento.png
 
